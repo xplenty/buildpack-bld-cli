@@ -12,7 +12,7 @@ function indent() {
 }
 
 BUILD_DIR=$1
-BUILD_CLI_URL="https://github.com/buildio/bins/releases/latest/download/bld-linux-amd64.zip"
+BUILD_CLI_URL="https://github.com/buildio/cli/releases/latest/download/bld-linux-amd64.zip"
 
 BUILDPACK_DIR="$(dirname $(dirname $0))"
 INSTALL_DIR="/app/.bldcli"
