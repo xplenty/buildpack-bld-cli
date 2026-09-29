@@ -12,7 +12,15 @@ function indent() {
 }
 
 BUILD_DIR=$1
-BUILD_CLI_URL="https://github.com/buildio/cli/releases/latest/download/bld-linux-amd64.zip"
+ENV_DIR=${3:-}
+
+# Pinned because not every buildio/cli release publishes a Linux asset, so
+# releases/latest/download/bld-linux-amd64.zip can 404. Override with BLD_CLI_VERSION.
+BLD_CLI_VERSION="v1.1.138"
+if [[ -n "${ENV_DIR}" && -f "${ENV_DIR}/BLD_CLI_VERSION" ]]; then
+  BLD_CLI_VERSION=$(cat "${ENV_DIR}/BLD_CLI_VERSION")
+fi
+BUILD_CLI_URL="https://github.com/buildio/cli/releases/download/${BLD_CLI_VERSION}/bld-linux-amd64.zip"
 
 BUILDPACK_DIR="$(dirname $(dirname $0))"
 INSTALL_DIR="/app/.bldcli"
